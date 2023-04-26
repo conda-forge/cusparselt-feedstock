@@ -27,7 +27,7 @@ build:
   run_exports:
     - {{ pin_subpackage('cusparselt', exact=True) }}
   ignore_run_exports:
-    - __glibc
+    - __glibc  # [linux]
   missing_dso_whitelist:
     - '*/libgomp.*'  # [linux]
 
