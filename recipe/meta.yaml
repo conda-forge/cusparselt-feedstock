@@ -45,11 +45,6 @@ test:
     - git
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # - {{ compiler('cuda') }}
-    - sysroot_{{ target_platform }} 2.17  # [linux]
-    # make sure we pick up the version matching the docker,
-    # or the linker would complain
-    - cudatoolkit 11.2
   files:
     - test_load_elf.c        # [linux]
 
