@@ -1,19 +1,19 @@
-{% set version = "0.3.0.3" %}
+{% set version = "0.4.0.6" %}
 
 package:
   name: cusparselt
   version: {{ version }}
 
 source:
-  url: https://developer.download.nvidia.com/compute/cusparselt/redist/libcusparse-lt/linux-x86_64/libcusparse_lt-linux-x86_64-{{ version }}-archive.tar.xz   # [linux64]
-  url: https://developer.download.nvidia.com/compute/cusparselt/redist/libcusparse-lt/linux-sbsa/libcusparse_lt-linux-sbsa-{{ version }}-archive.tar.xz       # [aarch64]
+  url: https://developer.download.nvidia.com/compute/cusparselt/redist/libcusparse-lt/linux-x86_64/libcusparse_lt-linux-x86_64-{{ version }}-archive.tar.xz  # [linux64]
+  url: https://developer.download.nvidia.com/compute/cusparselt/redist/libcusparse-lt/linux-sbsa/libcusparse_lt-linux-sbsa-{{ version }}-archive.tar.xz  # [aarch64]
   url: https://developer.download.nvidia.com/compute/cusparselt/redist/libcusparse-lt/windows-x86_64/libcusparse_lt-windows-x86_64-{{ version }}-archive.zip  # [win64]
-  sha256: 46b258c2c333f7324e03bdf6b13576be6153b1218fb531025631650e36515f45  # [linux64]
-  sha256: 6269885ec6cecc1a0aa95f344f35c882b6bf0a6ef55d1726e2cf59e11a3af68e  # [aarch64]
-  sha256: 321cb5f4dac58fe518e71c38cc7363c0f6090eb8e6c6455941e50d247ddbf8cf  # [win64]
+  sha256: 41ed4fe763e394bd435d977051f0f1a0bd51aa782d0aa46555dd64c8077c2f26  # [linux64]
+  sha256: b546f836b12a96c645095a087a1e216e48a0b720a816a355832ed79937bc20f5  # [aarch64]
+  sha256: b972af965c4c98265c1bce42dfb97b19f67451db527589ea1bd504205b266413  # [win64]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [ppc64le or (cuda_compiler_version != "11.2")]
   script:
     - mkdir -p $PREFIX/include                                                # [unix]
@@ -58,7 +58,7 @@ about:
   license: LicenseRef-cuSPARSELt-Software-License-Agreement
   license_url: https://docs.nvidia.com/cuda/cusparselt/license.html
   license_file: LICENSE
-  summary: "Basic Linear Algebra for Sparse Matrices on NVIDIA GPUs"
+  summary: Basic Linear Algebra for Sparse Matrices on NVIDIA GPUs
   description: |
     NVIDIA cuSPARSELt is a high-performance CUDA library dedicated to general
     matrix-matrix operations in which at least one operand is a sparse matrix.
