@@ -14,7 +14,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [ppc64le or (cuda_compiler_version != "11.2")]
+  skip: true  # [ppc64le or osx]
   script:
     - mkdir -p $PREFIX/include                                                # [unix]
     - cp -r include/* $PREFIX/include/                                        # [unix]
@@ -33,9 +33,10 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ compiler('cuda') }}
+    # - {{ compiler('cuda') }}  # can't use nvcc here, due to version mismatch with the docker image
     - sysroot_{{ target_platform }} 2.17  # [linux]
   run:
+    - cudatoolkit 11.*
   run_constrained:
     - __glibc >=2.27  # [linux]
 
@@ -44,7 +45,7 @@ test:
     - git
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ compiler('cuda') }}
+    # - {{ compiler('cuda') }}
     - sysroot_{{ target_platform }} 2.17  # [linux]
     # make sure we pick up the version matching the docker,
     # or the linker would complain
