@@ -26,6 +26,8 @@ build:
     - copy lib\\cusparseLt.lib %LIBRARY_LIB%\\                             # [win64]
   run_exports:
     - {{ pin_subpackage('cusparselt', exact=True) }}
+  ignore_run_exports:
+    - __glibc
   missing_dso_whitelist:
     - '*/libgomp.*'  # [linux]
 
