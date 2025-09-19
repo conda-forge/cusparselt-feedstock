@@ -131,6 +131,8 @@ about:
   dev_url: https://developer.nvidia.com/cusparselt/downloads
 
 extra:
+  compute-subdir: cusparselt
+  redist-json-name: libcusparse_lt
   recipe-maintainers:
     - conda-forge/cuda
     - kvoronin
