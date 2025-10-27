@@ -10,3 +10,8 @@ github:
 provider:
   linux_aarch64: default
   linux_ppc64le: default
+bot:
+  version_updates:
+    nvidia:
+      compute_subdir: cusparselt
+      json_name: libcusparse_lt
