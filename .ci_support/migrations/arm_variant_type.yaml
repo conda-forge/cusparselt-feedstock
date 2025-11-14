@@ -9,29 +9,23 @@ __migrator:
     CUDA 12.9.x.
 
   use_local: true
-  operation: key_add
-  migration_number: 1
-  build_number: 1
-  paused: false
-  check_solvable: true
+  paused: true
+  kind: version
+  migration_number:
+    1
+  build_number:
+    0
+  override_cbc_keys:
+    - cuda_compiler_stub
+  check_solvable: false
   wait_for_migrators:
     - cuda129
-  primary_key: arm_variant_type
-  ordering:
-    arm_variant_type:
-      - sbsa   # already exists in global pinning
-      - tegra  # new entry
 
-  # New entry needs to be zipped with c_stdlib_version and cuda_compiler_version.
-  # additional_zip_keys:
-  #   - c_stdlib_version          # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  #   - cuda_compiler_version     # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+cuda_compiler_version:         # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - 12.9                       # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
 
-c_stdlib_version:                 # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 2.34                          # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+c_stdlib_version:              # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - 2.34                       # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
 
-cuda_compiler_version:            # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - 12.9                          # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-
-arm_variant_type:                 # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
-  - tegra                         # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+arm_variant_type:              # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
+  - tegra                      # [linux and aarch64 and os.environ.get("CF_CUDA_ENABLED", "False") == "True"]
