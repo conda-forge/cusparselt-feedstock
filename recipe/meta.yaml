@@ -26,6 +26,7 @@ source:
 build:
   number: 0
   skip: true  # [ppc64le or not (cuda_compiler_version or "").startswith(("12", "13"))]
+  skip: true  # [(arm_variant_type == "tegra") and not (cuda_compiler_version or "").startswith("12")]
   script:   # [win]
     - xcopy include %LIBRARY_INC% /E /I /Y /V  # [win]
     - copy lib\cusparseLt.lib %LIBRARY_LIB%\cusparseLt.lib /Y /V  # [win]
@@ -37,6 +38,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
     - cf-nvidia-tools 1   # [linux]
+    - arm-variant {{ arm_variant_type }}  # [linux and aarch64]
 
 outputs:
 
@@ -53,6 +55,7 @@ outputs:
         - {{ compiler('cuda') }}
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
+        - arm-variant {{ arm_variant_type }}  # [linux and aarch64]
       host:
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
       run:
@@ -83,6 +86,7 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("cusparselt", exact=True) }}
+        - arm-variant {{ arm_variant_type }}  # [linux and aarch64]
       run:
         - {{ pin_subpackage("cusparselt", exact=True) }}
     test:
