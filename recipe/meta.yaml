@@ -39,7 +39,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
     - cf-nvidia-tools 1   # [linux]
-    - arm-variant {{ arm_variant_type }}  # [linux and aarch64]
+    - arm-variant * {{ arm_variant_type }}  # [linux and aarch64]
 
 outputs:
 
@@ -56,7 +56,7 @@ outputs:
         - {{ compiler('cuda') }}
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
-        - arm-variant {{ arm_variant_type }}  # [linux and aarch64]
+        - arm-variant * {{ arm_variant_type }}      # [linux and aarch64]
       host:
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
       run:
@@ -87,7 +87,7 @@ outputs:
     requirements:
       host:
         - {{ pin_subpackage("cusparselt", exact=True) }}
-        - arm-variant {{ arm_variant_type }}  # [linux and aarch64]
+        - arm-variant * {{ arm_variant_type }}  # [linux and aarch64]
       run:
         - {{ pin_subpackage("cusparselt", exact=True) }}
     test:
