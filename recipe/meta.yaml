@@ -25,9 +25,8 @@ source:
 
 build:
   number: 0
-  # Disable skips to debug what variants are created before pruning
-  # skip: true  # [ppc64le or not (cuda_compiler_version or "").startswith(("12", "13"))]
-  # skip: true  # [(arm_variant_type == "tegra") and not (cuda_compiler_version or "").startswith("12")]
+  skip: true  # [ppc64le or not (cuda_compiler_version or "").startswith(("12", "13"))]
+  skip: true  # [(arm_variant_type == "tegra") and not (cuda_compiler_version or "").startswith("12")]
   script:   # [win]
     - xcopy include %LIBRARY_INC% /E /I /Y /V  # [win]
     - copy lib\cusparseLt.lib %LIBRARY_LIB%\cusparseLt.lib /Y /V  # [win]
