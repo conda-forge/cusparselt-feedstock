@@ -27,7 +27,7 @@ source:
     sha256: "0fcf5808f66c71f755b4a73af2e955292e4334fec6a851eea1ac2e20878602b7"  # [linux and aarch64 and (cuda_compiler_version or "").startswith("13") and arm_variant_type == "tegra"]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [ppc64le or not (cuda_compiler_version or "").startswith(("12", "13"))]
   script:   # [win]
     - xcopy include %LIBRARY_INC% /E /I /Y /V  # [win]
