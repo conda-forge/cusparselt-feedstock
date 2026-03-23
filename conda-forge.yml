@@ -15,3 +15,5 @@ bot:
     nvidia:
       compute_subdir: cusparselt
       json_name: libcusparse_lt
+  abi_migration_branches:
+    - '0.8.x'
