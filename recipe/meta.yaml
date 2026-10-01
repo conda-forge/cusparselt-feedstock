@@ -1,6 +1,7 @@
 {% set version = "0.10.0.12" %}
 {% set soversion = ".".join(version.split(".")[:4]) %}
 {% set somajor = version.split(".")[0] %}
+{% set windll_major = "13" %}
 {% set arm_variant_type = arm_variant_type | default("sbsa") %}
 {% set cuda_compiler_version = cuda_compiler_version | default("None") %}
 
@@ -22,7 +23,7 @@ build:
   script:   # [win]
     - xcopy include %LIBRARY_INC% /E /I /Y /V  # [win]
     - copy lib\cusparseLt.lib %LIBRARY_LIB%\cusparseLt.lib /Y /V  # [win]
-    - copy bin\cusparseLt_{{ somajor }}.dll %LIBRARY_BIN%\cusparseLt_{{ somajor }}.dll /Y /V  # [win]
+    - copy bin\cusparseLt_{{ windll_major }}.dll %LIBRARY_BIN%\cusparseLt_{{ windll_major }}.dll /Y /V  # [win]
 requirements:
   build:
     - {{ compiler('c') }}
@@ -39,7 +40,7 @@ outputs:
         - cuda-version
     files:
       - lib/libcusparseLt.so.*              # [linux]
-      - Library/bin/cusparseLt_{{ somajor }}.dll          # [win]
+      - Library/bin/cusparseLt_{{ windll_major }}.dll          # [win]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -55,7 +56,7 @@ outputs:
         - test -f $PREFIX/lib/libcusparseLt.so.{{ soversion }}  # [linux]
         - test -L $PREFIX/lib/libcusparseLt.so.{{ somajor }}  # [linux]
         - test ! -f $PREFIX/lib/libcusparseLt_static.a  # [linux]
-        - if not exist %LIBRARY_BIN%\\cusparseLt_{{ somajor }}.dll exit 1  # [win]
+        - if not exist %LIBRARY_BIN%\\cusparseLt_{{ windll_major }}.dll exit 1  # [win]
     about:
       summary: The NVIDIA cuSPARSELt runtime library
       license: LicenseRef-cuSPARSELt-Software-License-Agreement
@@ -90,7 +91,7 @@ outputs:
         - bash test/run_test.sh  # [linux]
         - if not exist %LIBRARY_LIB%\\cusparseLt.lib exit 1  # [win]
         - if not exist %LIBRARY_INC%\\cusparseLt.h exit 1  # [win]
-        - test/run_test.bat {{ somajor }}  # [win]
+        - test/run_test.bat {{ windll_major }}  # [win]
       requires:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
