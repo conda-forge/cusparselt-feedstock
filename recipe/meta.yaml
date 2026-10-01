@@ -22,7 +22,7 @@ build:
   script:   # [win]
     - xcopy include %LIBRARY_INC% /E /I /Y /V  # [win]
     - copy lib\cusparseLt.lib %LIBRARY_LIB%\cusparseLt.lib /Y /V  # [win]
-    - copy bin\cusparseLt.dll %LIBRARY_BIN%\cusparseLt.dll /Y /V  # [win]
+    - copy bin\cusparseLt_{{ somajor }}.dll %LIBRARY_BIN%\cusparseLt_{{ somajor }}.dll /Y /V  # [win]
 requirements:
   build:
     - {{ compiler('c') }}
@@ -39,7 +39,7 @@ outputs:
         - cuda-version
     files:
       - lib/libcusparseLt.so.*              # [linux]
-      - Library/bin/cusparseLt.dll          # [win]
+      - Library/bin/cusparseLt_{{ somajor }}.dll          # [win]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -55,7 +55,7 @@ outputs:
         - test -f $PREFIX/lib/libcusparseLt.so.{{ soversion }}  # [linux]
         - test -L $PREFIX/lib/libcusparseLt.so.{{ somajor }}  # [linux]
         - test ! -f $PREFIX/lib/libcusparseLt_static.a  # [linux]
-        - if not exist %LIBRARY_BIN%\\cusparseLt.dll exit 1  # [win]
+        - if not exist %LIBRARY_BIN%\\cusparseLt_{{ somajor }}.dll exit 1  # [win]
     about:
       summary: The NVIDIA cuSPARSELt runtime library
       license: LicenseRef-cuSPARSELt-Software-License-Agreement
@@ -90,7 +90,7 @@ outputs:
         - bash test/run_test.sh  # [linux]
         - if not exist %LIBRARY_LIB%\\cusparseLt.lib exit 1  # [win]
         - if not exist %LIBRARY_INC%\\cusparseLt.h exit 1  # [win]
-        - test/run_test.bat  # [win]
+        - test/run_test.bat {{ somajor }}  # [win]
       requires:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
