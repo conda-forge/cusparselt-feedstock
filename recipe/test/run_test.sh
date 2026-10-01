@@ -9,11 +9,7 @@ if [[ $target_platform == "linux-64" ]]; then
     LD_PRELOAD="$CUDA_STUB" ./test_load_elf $PREFIX/lib/libcusparseLt.so
 
     # for cuSPARSE header
-    if [[ "${cuda_compiler_version}" =~ 12.* ]]; then
-        CUDA_INC_PATH="${PREFIX}/include"
-    elif [[ "${cuda_compiler_version}" =~ 11.* ]]; then
-        CUDA_INC_PATH="${CUDA_PATH}/include"
-    fi
+    CUDA_INC_PATH="${PREFIX}/include"
 
     git clone https://github.com/NVIDIA/CUDALibrarySamples.git sample_linux/
     cd sample_linux/cuSPARSELt/matmul
